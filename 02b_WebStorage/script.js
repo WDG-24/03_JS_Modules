@@ -2,9 +2,15 @@ let users = [];
 const containerEl = document.getElementById('card-container');
 
 const renderUserCards = (data) => {
+  // Lädt gespeicherte Bookmarks aus localStorage
+  // Wenn keine bookmark vorhanden ist (erstes Laden) wird ein leeres Array erstellt
+  //  ?? -> Nullish Coalescing Operator: gibt den rechten Ausdruck zurück, wenn der linke null oder undefined ist
   const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) ?? [];
+
   for (const user of data) {
+    // Prüft, ob User bereits als Bookmark gespeichert ist
     const exists = bookmarks.find((u) => u.id === user.id);
+
     const html = `
      <article class="boder rounded-xl shadow-indigo-950 shadow-2xl bg-indigo-900 py-5 px-8 space-y-2"
       style="background-color: oklch(from #312c85 l c ${Math.abs(user.address.geo.lng) + 30});"
@@ -54,15 +60,20 @@ const fetchPlaceholders = async () => {
 const saveUser = (userId) => {
   const userObj = users.find((user) => user.id === userId);
 
+  // Lädt bestehende Bookmarks aus localStorage
   const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) ?? [];
   bookmarks.push(userObj);
 
+  // Speichert erweiterte Bookmark-Liste in localStorage
   localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
 };
 
 const removeUser = (userId) => {
+  // Lädt bestehende Bookmarks aus localStorage
   const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) ?? [];
   const updatedBookmarks = bookmarks.filter((user) => user.id !== userId);
+
+  // Aktualisiert localStorage mit gefilterter Liste
   localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
 };
 
@@ -74,6 +85,7 @@ const handleContainerClick = (e) => {
   if (target.textContent === 'Bookmark') saveUser(userId);
   if (target.textContent === 'Saved') removeUser(userId);
 
+  // Toggle Button-Text zwischen 'Bookmark' und 'Saved'
   target.textContent = target.textContent === 'Bookmark' ? 'Saved' : 'Bookmark';
 };
 
