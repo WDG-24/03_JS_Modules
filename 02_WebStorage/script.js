@@ -1,30 +1,32 @@
-// localStorage.setItem('myNumber', 123);
+localStorage.clear();
 
-// const data = localStorage.getItem('myNumber');
-// console.log(123);
-// console.log(typeof data);
+localStorage.setItem('myNumber', 123);
 
-// // localStorage.setItem('myObject', { hello: 'world' });
+const data = localStorage.getItem('myNumber');
+console.log(123);
+console.log(typeof data);
 
-// // console.log(`${{ hello: 'world' }}`);
+// localStorage.setItem('myObject', { hello: 'world' });
 
-// const myObj = {
-//   hello: 'world',
-//   num: 42,
-//   myMethod() {
-//     return 'Hello';
-//   },
-// };
+// console.log(`${{ hello: 'world' }}`);
 
-// const serializedObj = JSON.stringify(myObj);
+const myObj = {
+  hello: 'world',
+  num: 42,
+  myMethod() {
+    return 'Hello';
+  },
+};
 
-// localStorage.setItem('myObject', serializedObj);
+const serializedObj = JSON.stringify(myObj);
 
-// // console.log(serializedObj);
+localStorage.setItem('myObject', serializedObj);
 
-// const objFromLS = localStorage.getItem('myObject');
-// console.log(objFromLS);
+// console.log(serializedObj);
 
-// console.log(JSON.parse(objFromLS));
+const objFromLS = localStorage.getItem('myObject');
+console.log(objFromLS);
 
-// sessionStorage.setItem('myNum', 123);
+console.log(JSON.parse(objFromLS));
+
+sessionStorage.setItem('myNum', 123);
